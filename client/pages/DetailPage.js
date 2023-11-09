@@ -1,27 +1,47 @@
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { useQuery, gql } from "@apollo/client";
+
+const GET_DETAIL = gql`
+  query Products($productId: ID!) {
+    product(id: $productId) {
+      id
+      mainImg
+      name
+      price
+      description
+    }
+  }
+`;
 
 export default function DetailPage() {
+  const route = useRoute();
+  const { loading, error, data } = useQuery(GET_DETAIL, {
+    variables: {
+      productId: route.params.id,
+    },
+  });
+
+  console.log({ loading, error, data });
+
   return (
     <View style={styles.container}>
       <Image
         style={styles.image}
         source={{
-          uri: "https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/419496/item/goods_68_419496.jpg?width=734",
+          uri: data?.product?.mainImg || "",
         }}
       />
       <View style={{ padding: 16, paddingRight: 60 }}>
-        <Text style={styles.title}>MEN SOFT TOUCH LONG-SLEEVE</Text>
+        <Text style={styles.title}>{data?.product?.name || ""}</Text>
         <Text
           style={{
             marginBottom: 14,
           }}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, optio
-          qui ullam quam voluptates consequatur sapiente nesciunt praesentium
-          minima asperiores vitae, dolore culpa quas atque dolores nihil in, hic
-          accusamus
+          {data?.product?.description || ""}
         </Text>
-        <Text style={styles.price}>Rp. 20000</Text>
+        <Text style={styles.price}>Rp. {data?.product?.price || ""}</Text>
       </View>
     </View>
   );

@@ -12,7 +12,13 @@ export default function Card({ product }) {
   const navigation = useNavigation();
 
   return (
-    <Pressable onPress={() => navigation.navigate("detail")}>
+    <Pressable
+      onPress={() =>
+        navigation.navigate("detail", {
+          id: product.id,
+        })
+      }
+    >
       <View
         style={{
           width: styles.screenSize.width / 2.5,
