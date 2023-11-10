@@ -4,9 +4,10 @@ import LandingPage from "./pages/LandingPage";
 import ProductsPage from "./pages/ProductsPage";
 import DetailPage from "./pages/DetailPage";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import AddProduct from "./pages/AddProduct";
 
 const client = new ApolloClient({
-  uri: "https://3a2f-101-128-103-53.ngrok-free.app/",
+  uri: "http://localhost:4000/",
   cache: new InMemoryCache(),
 });
 
@@ -24,6 +25,7 @@ export default function App() {
           />
           <Stack.Screen name="products" component={ProductsPage} />
           <Stack.Screen name="detail" component={DetailPage} />
+          <Stack.Screen name="form" component={AddProduct} />
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

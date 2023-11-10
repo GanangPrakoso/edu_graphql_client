@@ -3,7 +3,7 @@ import { useRoute } from "@react-navigation/native";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_DETAIL = gql`
-  query Products($productId: ID!) {
+  query ProductDetail($productId: ID!) {
     product(id: $productId) {
       id
       mainImg
