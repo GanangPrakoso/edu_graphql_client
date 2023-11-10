@@ -1,6 +1,5 @@
 import { View, Text, FlatList } from "react-native";
 import Card from "../components/Card";
-import LottieView from "lottie-react-native";
 
 export default function ProductsPage() {
   const products = [
